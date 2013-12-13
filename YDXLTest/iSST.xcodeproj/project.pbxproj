@@ -34,6 +34,8 @@
 		790BC1F4184EABE8006ABD1C /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 790BC1E8184EABE8006ABD1C /* whiteArrow.png */; };
 		790BC1F5184EABE8006ABD1C /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 790BC1E9184EABE8006ABD1C /* whiteArrow@2x.png */; };
 		790BC1F7184EC9EB006ABD1C /* ic_milestone_heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 790BC1F6184EC9EA006ABD1C /* ic_milestone_heart.png */; };
+		791C3E291859B6FD00D8B4F2 /* ProgramsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C3E281859B6FD00D8B4F2 /* ProgramsCell.m */; };
+		7928F3DF1859E9FD0092963A /* ISSTProgramsApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928F3DE1859E9FD0092963A /* ISSTProgramsApi.m */; };
 		793AECE3185009F400D25321 /* Comments.JSON in Resources */ = {isa = PBXBuildFile; fileRef = 793AECE2185009F400D25321 /* Comments.JSON */; };
 		7940223E185196020097E207 /* ISSTUserApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 7940223D185196020097E207 /* ISSTUserApi.m */; };
 		7940224118519A740097E207 /* ISSTSpittlesApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 7940224018519A740097E207 /* ISSTSpittlesApi.m */; };
@@ -107,6 +109,10 @@
 		790BC1E8184EABE8006ABD1C /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrow.png; sourceTree = "<group>"; };
 		790BC1E9184EABE8006ABD1C /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
 		790BC1F6184EC9EA006ABD1C /* ic_milestone_heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_milestone_heart.png; sourceTree = "<group>"; };
+		791C3E271859B6FD00D8B4F2 /* ProgramsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramsCell.h; sourceTree = "<group>"; };
+		791C3E281859B6FD00D8B4F2 /* ProgramsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramsCell.m; sourceTree = "<group>"; };
+		7928F3DD1859E9FD0092963A /* ISSTProgramsApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISSTProgramsApi.h; sourceTree = "<group>"; };
+		7928F3DE1859E9FD0092963A /* ISSTProgramsApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISSTProgramsApi.m; sourceTree = "<group>"; };
 		793AECE2185009F400D25321 /* Comments.JSON */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Comments.JSON; sourceTree = "<group>"; };
 		7940223C185196020097E207 /* ISSTUserApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISSTUserApi.h; sourceTree = "<group>"; };
 		7940223D185196020097E207 /* ISSTUserApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISSTUserApi.m; sourceTree = "<group>"; };
@@ -269,6 +275,8 @@
 				7940223D185196020097E207 /* ISSTUserApi.m */,
 				7940223F18519A740097E207 /* ISSTSpittlesApi.h */,
 				7940224018519A740097E207 /* ISSTSpittlesApi.m */,
+				7928F3DD1859E9FD0092963A /* ISSTProgramsApi.h */,
+				7928F3DE1859E9FD0092963A /* ISSTProgramsApi.m */,
 				7991E252184F6B6500559EF8 /* JsonParser.h */,
 				7991E253184F6B6500559EF8 /* JsonParser.m */,
 				79ACD066184F66E1001FB49C /* Object.json */,
@@ -368,6 +376,8 @@
 				B5408A2A18520A27005EB3C5 /* LoginViewController.m */,
 				79CC4B1F1857F86E00C091E7 /* VoteProgramsViewController.h */,
 				79CC4B201857F86E00C091E7 /* VoteProgramsViewController.m */,
+				791C3E271859B6FD00D8B4F2 /* ProgramsCell.h */,
+				791C3E281859B6FD00D8B4F2 /* ProgramsCell.m */,
 				79CC4B221857FDE600C091E7 /* PersonalInfoViewController.h */,
 				79CC4B231857FDE600C091E7 /* PersonalInfoViewController.m */,
 			);
@@ -495,6 +505,7 @@
 				790BC1ED184EABE8006ABD1C /* PullTableView.m in Sources */,
 				AEC66C33185795A5008F7304 /* SpittleParse.m in Sources */,
 				AEC66C30185777E3008F7304 /* UserLoginParse.m in Sources */,
+				791C3E291859B6FD00D8B4F2 /* ProgramsCell.m in Sources */,
 				B5408A2B18520A27005EB3C5 /* LoginViewController.m in Sources */,
 				790BC1EA184EABE8006ABD1C /* EGORefreshTableHeaderView.m in Sources */,
 				794022561851A9190097E207 /* ISSTUserModel.m in Sources */,
@@ -505,6 +516,7 @@
 				790BC1EC184EABE8006ABD1C /* MessageInterceptor.m in Sources */,
 				794022541851A9190097E207 /* ISSTSpittleIslikeModel.m in Sources */,
 				794022521851A9190097E207 /* ISSTShowVoteModel.m in Sources */,
+				7928F3DF1859E9FD0092963A /* ISSTProgramsApi.m in Sources */,
 				79CC4B241857FDE600C091E7 /* PersonalInfoViewController.m in Sources */,
 				794022531851A9190097E207 /* ISSTSpittleContentModel.m in Sources */,
 				7991E254184F6B6500559EF8 /* JsonParser.m in Sources */,
@@ -648,7 +660,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YDXLTest/iSST-Prefix.pch";
 				INFOPLIST_FILE = "YDXLTest/iSST-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = iSST;
 				PROVISIONING_PROFILE = "ABF20AF7-88A7-4541-AC2C-8166D2B5D396";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -669,7 +681,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YDXLTest/iSST-Prefix.pch";
 				INFOPLIST_FILE = "YDXLTest/iSST-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = iSST;
 				PROVISIONING_PROFILE = "ABF20AF7-88A7-4541-AC2C-8166D2B5D396";
 				TARGETED_DEVICE_FAMILY = 1;

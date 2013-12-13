@@ -14,6 +14,8 @@
 
 @implementation VoteProgramsViewController
 
+@synthesize programsApi;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -26,7 +28,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.programsApi = [[ISSTProgramsApi alloc] init];
+    self.programsApi.webApiDelegate =self;
 	// Do any additional setup after loading the view.
+    NSString *userId = @"1";
+    [self.programsApi requestProgramsListWithUserId:userId];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,16 +54,28 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"programs";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    ProgramsCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[ProgramsCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     return cell;
 
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)requestDataOnSuccess:(id)backToControllerData;
 {}
 
+- (void)requestDataOnFail:(NSString *)error
+{}
+
+- (IBAction)refreshTableView:(id)sender {
+    NSString *userId = @"1";
+    [self.programsApi requestProgramsListWithUserId:userId];
+}
 @end
