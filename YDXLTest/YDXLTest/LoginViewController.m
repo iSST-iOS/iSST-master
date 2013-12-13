@@ -39,6 +39,7 @@ bool isok;//确定登陆是否成功，成功的话页面跳转，否则，不�
 	// Do any additional setup after loading the view.
     isok=false;
     errorLabel.hidden = YES;
+    self.passwordField.secureTextEntry=YES;
     self.userApi = [[ISSTUserApi alloc]init];
     self.userApi.webApiDelegate = self;
     shouldShowSplashView = YES;

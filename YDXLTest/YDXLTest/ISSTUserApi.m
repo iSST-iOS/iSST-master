@@ -43,6 +43,10 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     NSLog(@"%@",[error localizedDescription]);
+    [self.webApiDelegate requestDataOnFail:@"查看网络连接"];
+
+    
+    
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response

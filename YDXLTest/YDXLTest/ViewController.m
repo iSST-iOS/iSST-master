@@ -41,6 +41,7 @@
 {
     [super viewDidLoad];
 //    [self.navigationController setNavigationBarHidden:YES animated:YES];
+        
     self.spittleApi = [[ISSTSpittlesApi alloc]init];
     self.spittleApi.webApiDelegate =self;
     NSLog(@"userModel=%@",userModel.Utype);
@@ -115,12 +116,12 @@
         UILabel *Dislikes=[cell viewWithTag:7];
         UIImageView *islike=[cell viewWithTag:1];
         UIImageView *isdislike=[cell viewWithTag:2];
-        spittleContent.SCnickname=[[array objectAtIndex:indexPath.section] valueForKey:@"nickname"];
-        spittleContent.SClikes=[[[array objectAtIndex:indexPath.section]valueForKey:@"likes"] stringValue];
-        spittleContent.SCdislikes=[[[array objectAtIndex:indexPath.section]valueForKey:@"dislikes"]stringValue];
-        spittleContent.SCisliked=[[[array objectAtIndex:indexPath.section] valueForKey:@"isLiked"]stringValue];
-        NSLog(@"idliked=%@",spittleContent.SCisliked);
-        spittleContent.SCisdisliked=[[[array objectAtIndex:indexPath.section]valueForKey:@"isDisliked"]stringValue];
+       // spittleContent.SCnickname=[[array objectAtIndex:indexPath.section] valueForKey:@"nickname"];
+//        spittleContent.SClikes=[[[array objectAtIndex:indexPath.section]valueForKey:@"likes"] stringValue];
+//        spittleContent.SCdislikes=[[[array objectAtIndex:indexPath.section]valueForKey:@"dislikes"]stringValue];
+//        spittleContent.SCisliked=[[[array objectAtIndex:indexPath.section] valueForKey:@"isLiked"]stringValue];
+      //  NSLog(@"idliked=%@",spittleContent.SCisliked);
+       spittleContent.SCisdisliked=[[[array objectAtIndex:indexPath.section]valueForKey:@"isDisliked"]stringValue];
         if([[[array objectAtIndex:indexPath.section] valueForKey:@"isLiked"]intValue]==1)
             islike.image=[UIImage imageNamed:@"Good2.png"];
         else islike.image=[UIImage imageNamed:@"Good1.png"];
@@ -128,10 +129,13 @@
             isdislike.image=[UIImage imageNamed:@"Bad2.png"];
         else isdislike.image=[UIImage imageNamed:@"Bad1.png"];
 
+        title.text=[[array objectAtIndex:indexPath.section] valueForKey:@"nickname"];
+        Likes.text=[[[array objectAtIndex:indexPath.section]valueForKey:@"likes"] stringValue];
+        Dislikes.text=[[[array objectAtIndex:indexPath.section]valueForKey:@"dislikes"]stringValue];
 //        if(spittleContent!=nil)
-        title.text=spittleContent.SCnickname;
-        Likes.text=spittleContent.SClikes;
-        Dislikes.text=spittleContent.SCdislikes;
+//        title.text=spittleContent.SCnickname;
+//        Likes.text=spittleContent.SClikes;
+//        Dislikes.text=spittleContent.SCdislikes;
         NSLog(@"celllikes=%@",Dislikes.text);
 //        else title.text=nil;
         return cell;
@@ -473,7 +477,11 @@
 //        spittleContent.SCdislikes=@"0";
 //        spittleContent.SClikes=@"0";
 //        spittleContent.SCyear=@"2013";
-        [spittleApi requestPostSpittleWithUserId:spittleContent.SCuserid andContent:spittleContent.SCcontent];
+        for (int i=1; i<101; i++) {
+               sleep(1);
+               [spittleApi requestPostSpittleWithUserId:spittleContent.SCuserid andContent:[NSString stringWithFormat:@"次数%d:%@",i,spittleContent.SCcontent] ];
+        }
+     
         //[array insertObject:spittleContent atIndex:0];
     }
     
