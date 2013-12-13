@@ -32,7 +32,7 @@
     
     [super viewWillAppear:animated];
     [spittleApi requestDownGetSpittlesWithUserId:userModel.Uid andPage:0 andPageSize:10];
-    spittleContent=[[ISSTSpittleContentModel alloc]init];
+    
 }
 
 - (void)viewDidLoad
@@ -99,6 +99,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    spittleContent=[[ISSTSpittleContentModel alloc]init];
     if (indexPath.row == 0) {
         static NSString *CellIdentifier = @"WeiboCell1";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
@@ -106,12 +107,25 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         }
+        
         UILabel *title=[cell viewWithTag:101];
         UILabel *Likes=[cell viewWithTag:6];
         UILabel *Dislikes=[cell viewWithTag:7];
+        UIImageView *islike=[cell viewWithTag:1];
+        UIImageView *isdislike=[cell viewWithTag:2];
         spittleContent.SCnickname=[[array objectAtIndex:indexPath.section] valueForKey:@"nickname"];
         spittleContent.SClikes=[[[array objectAtIndex:indexPath.section]valueForKey:@"likes"] stringValue];
         spittleContent.SCdislikes=[[[array objectAtIndex:indexPath.section]valueForKey:@"dislikes"]stringValue];
+        spittleContent.SCisliked=[[[array objectAtIndex:indexPath.section] valueForKey:@"isLiked"]stringValue];
+        NSLog(@"idliked=%@",spittleContent.SCisliked);
+        spittleContent.SCisdisliked=[[[array objectAtIndex:indexPath.section]valueForKey:@"isDisliked"]stringValue];
+        if([[[array objectAtIndex:indexPath.section] valueForKey:@"isLiked"]intValue]==1)
+            islike.image=[UIImage imageNamed:@"Good2.png"];
+        else islike.image=[UIImage imageNamed:@"Good1.png"];
+        if([[[array objectAtIndex:indexPath.section]valueForKey:@"isDisliked"]intValue]==1)
+            isdislike.image=[UIImage imageNamed:@"Bad2.png"];
+        else isdislike.image=[UIImage imageNamed:@"Bad1.png"];
+
 //        if(spittleContent!=nil)
         title.text=spittleContent.SCnickname;
         Likes.text=spittleContent.SClikes;
@@ -131,7 +145,6 @@
         UILabel *Time=[cell viewWithTag:105];
         NSLog(@"CellArray=%@",[[array objectAtIndex:indexPath.section] valueForKey:@"content"]);
         spittleContent.SCcontent=[[array objectAtIndex:indexPath.section] valueForKey:@"content"];
-        spittleContent.SCposttime=
         content.text=spittleContent.SCcontent;
         NSString  *postTime =[[[array objectAtIndex:indexPath.section]valueForKey:@"postTime"]stringValue];
         NSDate  *datePT = [NSDate dateWithTimeIntervalSince1970:[postTime longLongValue]];
@@ -170,7 +183,7 @@
     }
     else if(self.spittleApi.method_id == POST_SPITTLE)
     {
-        [self.tableViewSS reloadData];
+        [spittleApi requestDownGetSpittlesWithUserId:userModel.Uid andPage:0 andPageSize:20];
         
     }
     else if(self.spittleApi.method_id == DOWN_REFRESH)
@@ -192,7 +205,9 @@
     }
     else if(self.spittleApi.method_id == EGG_SPITTLE_REFRESH)
     {
-        
+        array=backToControllerData;
+        [self.tableViewSS reloadData];
+
     }
     else if(self.spittleApi.method_id == EGG_SPITTLE)
     {
@@ -453,14 +468,44 @@
     [self.textFieldView endEditing:YES];
     
 }
--(IBAction)likeBtnClick:(id)sender
+-(IBAction)likeBtnClick:(UIButton*)sender
 {
-    
+    UIView *v=[sender superview];
+    UITableViewCell *mycell=(UITableViewCell *)[v superview];
+    UITableViewCell *cell=(UITableViewCell *)[mycell superview];
+    NSIndexPath* indexPath=[tableViewSS indexPathForCell:cell];
+    NSLog(@"row=%d",indexPath.section);
+    NSLog(@"scontent=%@",[[array objectAtIndex:indexPath.section] valueForKey:@"content"]);
+    if([[[array objectAtIndex:indexPath.section] valueForKey:@"isDisliked"]intValue]==0&&[[[array objectAtIndex:indexPath.section] valueForKey:@"isLiked"]intValue]==0)
+    {
+        [self.spittleApi requestLikeSpittleWithUserId:self.userModel.Uid andSpittlesId:[[[array objectAtIndex:indexPath.section] valueForKey:@"id"]stringValue] andLike:YES];
+        UILabel *Likes=[cell viewWithTag:6];
+        UIImageView *islike=[cell viewWithTag:1];
+        NSString *likes=[[NSString alloc] initWithFormat:@"%d",([[[array objectAtIndex:indexPath.section]valueForKey:@"likes"]intValue]+1)];
+        Likes.text=likes;
+        islike.image=[UIImage imageNamed:@"Good2.png"];
+        
+    }
    
 }
--(IBAction)dislikeBtnClick:(id)sender
+-(IBAction)dislikeBtnClick:(UIButton*)sender
 {
-    
+    UIView *v=[sender superview];
+    UITableViewCell *mycell=(UITableViewCell *)[v superview];
+    UITableViewCell *cell=(UITableViewCell *)[mycell superview];
+    NSIndexPath* indexPath=[tableViewSS indexPathForCell:cell];
+    NSLog(@"row=%d",indexPath.section);
+    NSLog(@"scontent=%@",[[array objectAtIndex:indexPath.section] valueForKey:@"content"]);
+    if([[[array objectAtIndex:indexPath.section] valueForKey:@"isDisliked"]intValue]==0&&[[[array objectAtIndex:indexPath.section] valueForKey:@"isLiked"]intValue]==0)
+    {
+        [self.spittleApi requestLikeSpittleWithUserId:self.userModel.Uid andSpittlesId:[[[array objectAtIndex:indexPath.section] valueForKey:@"id"]stringValue] andLike:NO];
+        UILabel *Dislikes=[cell viewWithTag:7];
+        UIImageView *islike=[cell viewWithTag:2];
+        NSString *dislikes=[[NSString alloc] initWithFormat:@"%d",([[[array objectAtIndex:indexPath.section]valueForKey:@"dislikes"]intValue]+1)];
+        Dislikes.text=dislikes;
+        islike.image=[UIImage imageNamed:@"Bad2.png"];
+
+    }
 }
 - (IBAction)SortControls:(UISegmentedControl *)sender
 {

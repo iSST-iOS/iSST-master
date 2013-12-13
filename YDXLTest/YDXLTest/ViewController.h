@@ -45,8 +45,8 @@
 - (IBAction)textFieldReturnEditing:(id)sender;
 
 - (IBAction)backgroundTab:(id)sender;//发送吐槽内容
--(IBAction)likeBtnClick:(id)sender;
--(IBAction)dislikeBtnClick:(id)sender;
+-(IBAction)likeBtnClick:(UIButton *)sender;
+-(IBAction)dislikeBtnClick:(UIButton *)sender;
 
 //开始重新加载时调用的方法
 - (void)reloadTableViewDataSource;

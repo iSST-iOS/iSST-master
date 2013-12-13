@@ -60,16 +60,20 @@
 
 - (void)requestLikeSpittleWithUserId:(NSString *)user_id andSpittlesId:(NSString *)spittleId andLike:(BOOL)like
 {
-    self.method_id = LIKE_SPITTLE;
-  //  URL: /isst/api/users/{userId}/spittles/{spittleId}/likes, POST{isLike:0|1}
+    datas=[NSMutableData new];
+    if(like)
+        self.method_id = LIKE_SPITTLE;
+    else self.method_id=EGG_SPITTLE;
+    //  URL: /isst/api/users/{userId}/spittles/{spittleId}/likes, POST{isLike:0|1}
 ///RESPONSE: {code: int, message: string} code==0?error(message):success
     NSString *subUrl = [NSString stringWithFormat:@"/users/%@/spittles/%@/likes",user_id,spittleId];
     NSString *info = [NSString stringWithFormat:@"isLike=%d",like?1:0];
-     [super requestWithSuburl:subUrl Method:@"GET" Delegate:self Info:info];
+     [super requestWithSuburl:subUrl Method:@"POST" Delegate:self Info:info];
 }
 
 - (void)requestNoGetSpittles
 {
+     datas=[NSMutableData new];
     self.method_id = EGG_SPITTLE_REFRESH;
     [super requestWithSuburl:@"" Method:@"GET" Delegate:self Info:nil];
 
@@ -164,14 +168,39 @@
     }
     else if(self.method_id == EGG_SPITTLE_REFRESH)
     {
+        NSArray *dict = [NSJSONSerialization JSONObjectWithData:datas options:NSJSONReadingAllowFragments error:nil];
+        [self.webApiDelegate requestDataOnSuccess:dict];
         
     }
     else if(self.method_id == EGG_SPITTLE)
     {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:datas options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"ClickLikedict=%@",dict);
+        NSString *codeString = [dict objectForKey:@"code"];//获取返回的code，确定返回数据是否正确。
+        if ([codeString intValue] <= 0) {
+            NSLog(@"网络连接错误");
+            [self.webApiDelegate requestDataOnFail:@"网络连接错误"];
+        }
+        else
+        {
+            [self.webApiDelegate requestDataOnSuccess:dict];
+        }
+
     
     }
     else if (self.method_id == LIKE_SPITTLE)
     {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:datas options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"ClickDisLikedict=%@",dict);
+        NSString *codeString = [dict objectForKey:@"code"];//获取返回的code，确定返回数据是否正确。
+        if ([codeString intValue] <= 0) {
+            NSLog(@"网络连接错误");
+            [self.webApiDelegate requestDataOnFail:@"网络连接错误"];
+        }
+        else
+        {
+            [self.webApiDelegate requestDataOnSuccess:dict];
+        }
     
     }
 }
