@@ -38,6 +38,8 @@
 @property (strong, nonatomic) NSMutableArray *array;
 @property(strong,nonatomic)ISSTSpittleContentModel *spittleContent;
 @property(strong,nonatomic)NSString *userId;
+@property(strong,nonatomic)UITableViewCell *selectedCell;
+@property(strong,nonatomic) NSIndexPath* selectedindexPath;
 
 
 - (IBAction)nameBtnClick:(id)sender;//昵称修改
