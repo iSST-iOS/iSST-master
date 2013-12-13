@@ -41,6 +41,8 @@
         NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:delegate];
         if (connection) {
             NSLog(@"连接成功");
+        } else {
+            NSLog(@"connect error");
         }
     } else if([method isEqualToString:@"DELETE"]) {
         

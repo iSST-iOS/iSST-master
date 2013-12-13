@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#include "ProgramsCell.h"
+#include "ISSTProgramsApi.h"
+#include "ISSTWebApiDelegate.h"
 
-@interface VoteProgramsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface VoteProgramsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ISSTWebApiDelegate>
+
+@property (weak, nonatomic) ISSTProgramsApi *programsApi;
+
+- (IBAction)refreshTableView:(id)sender;  //刷新列表
 
 @end

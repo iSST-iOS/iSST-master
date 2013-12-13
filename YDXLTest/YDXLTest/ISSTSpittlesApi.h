@@ -8,6 +8,7 @@
 
 #import "ISSTApi.h"
 #import "ISSTWebApiDelegate.h"
+
 #define POST_SPITTLE 1     //发送列表
 #define DOWN_REFRESH 2     //下拉刷新
 #define UP_REFRESH 3
@@ -15,7 +16,7 @@
 #define EGG_SPITTLE_REFRESH 5//砸鸡蛋
 #define PUT_NAME 6    //修改昵称
 #define LIKE_SPITTLE  7 //点赞
-#define  EGG_SPITTLE  8   //砸金蛋
+#define EGG_SPITTLE  8   //砸金蛋
 
 @interface ISSTSpittlesApi : ISSTApi <NSURLConnectionDataDelegate>
 {
