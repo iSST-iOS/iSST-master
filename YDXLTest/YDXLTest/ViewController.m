@@ -116,11 +116,13 @@
         UILabel *Dislikes=[cell viewWithTag:7];
         UIImageView *islike=[cell viewWithTag:1];
         UIImageView *isdislike=[cell viewWithTag:2];
-       // spittleContent.SCnickname=[[array objectAtIndex:indexPath.section] valueForKey:@"nickname"];
+      
+        // spittleContent.SCnickname=[[array objectAtIndex:indexPath.section] valueForKey:@"nickname"];
 //        spittleContent.SClikes=[[[array objectAtIndex:indexPath.section]valueForKey:@"likes"] stringValue];
 //        spittleContent.SCdislikes=[[[array objectAtIndex:indexPath.section]valueForKey:@"dislikes"]stringValue];
 //        spittleContent.SCisliked=[[[array objectAtIndex:indexPath.section] valueForKey:@"isLiked"]stringValue];
       //  NSLog(@"idliked=%@",spittleContent.SCisliked);
+        
        spittleContent.SCisdisliked=[[[array objectAtIndex:indexPath.section]valueForKey:@"isDisliked"]stringValue];
         if([[[array objectAtIndex:indexPath.section] valueForKey:@"isLiked"]intValue]==1)
             islike.image=[UIImage imageNamed:@"Good2.png"];
@@ -477,10 +479,8 @@
 //        spittleContent.SCdislikes=@"0";
 //        spittleContent.SClikes=@"0";
 //        spittleContent.SCyear=@"2013";
-        for (int i=1; i<101; i++) {
-               sleep(1);
-               [spittleApi requestPostSpittleWithUserId:spittleContent.SCuserid andContent:[NSString stringWithFormat:@"次数%d:%@",i,spittleContent.SCcontent] ];
-        }
+    
+               [spittleApi requestPostSpittleWithUserId:spittleContent.SCuserid andContent:[NSString stringWithFormat:@"%@",spittleContent.SCcontent] ];
      
         //[array insertObject:spittleContent atIndex:0];
     }
